@@ -14,3 +14,13 @@ exports.newMessage = (req, res) => {
     }
   });
 };
+
+exports.syncMessages = (req, res) => {
+  Message.find((error, messages) => {
+    if (error) {
+      res.status(500).send(error);
+    } else {
+      res.status(200).send(messages);
+    }
+  });
+};
