@@ -28,8 +28,9 @@ db.once("open", () => {
     if (change.operationType === "insert") {
       const messageDetails = change.fullDocument;
       pusher.trigger("messages", "inserted", {
-        name: messageDetails.name,
+        _id: messageDetails._id,
         message: messageDetails.message,
+        name: messageDetails.name,
         timeStamp: messageDetails.timeStamp,
       });
     } else {
