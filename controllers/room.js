@@ -11,4 +11,12 @@ exports.createRoom = (req, res) => {
     }
   });
 };
-exports.getRooms = (req, res) => {};
+exports.getRooms = (req, res) => {
+  Room.find((error, rooms) => {
+    if (error) {
+      res.status(500).send(error);
+    } else {
+      res.status(200).send(rooms);
+    }
+  });
+};
