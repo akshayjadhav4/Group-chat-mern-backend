@@ -5,6 +5,7 @@ const express = require("express");
 const cors = require("cors");
 
 const messageRoutes = require("./routes/message");
+const roomRoutes = require("./routes/room");
 
 // app instance
 const app = express();
@@ -36,6 +37,7 @@ const PORT = process.env.PORT || 2004;
 // });
 //using endpoints
 app.use("/api", messageRoutes);
+app.use("/api", roomRoutes);
 
 // listen
 app.listen(PORT, () => {
