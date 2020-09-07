@@ -27,7 +27,7 @@ db.once("open", () => {
     // actual pusher working
     if (change.operationType === "insert") {
       const messageDetails = change.fullDocument;
-      pusher.trigger("messages", "inserted", {
+      pusher.trigger(messageDetails.roomId, "inserted", {
         _id: messageDetails._id,
         message: messageDetails.message,
         name: messageDetails.name,
@@ -52,7 +52,8 @@ exports.newMessage = (req, res) => {
 };
 
 exports.syncMessages = (req, res) => {
-  Message.find((error, messages) => {
+  const roomId = req.query.roomId;
+  Message.find({ roomId: roomId }, (error, messages) => {
     if (error) {
       res.status(500).send(error);
     } else {
